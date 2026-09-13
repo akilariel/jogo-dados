@@ -1,0 +1,104 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.mesa {
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  padding: 20px;
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.titulo {
+  margin: 0 0 4px;
+  font-size: 24px;
+}
+
+.subtitulo {
+  margin: 0 0 16px;
+  color: #666666;
+}
+
+.jogadores {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.painel {
+  flex: 1;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+  padding: 12px 8px;
+}
+
+.nomeJogador {
+  font-weight: bold;
+  margin: 0 0 8px;
+}
+
+.dados {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.dado {
+  width: 48px;
+  height: 48px;
+}
+
+.placar {
+  font-size: 13px;
+  color: #666666;
+  margin: 8px 0 0;
+}
+
+.botaoJogar {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: #2b6cb0;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.botaoJogar:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.caixaMensagem {
+  padding: 10px;
+  border-radius: 6px;
+  background-color: #f7f7f7;
+  border: 1px solid #dddddd;
+  margin: 0 0 16px;
+}
+
+.botaoReiniciar {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #2b6cb0;
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: #2b6cb0;
+  font-size: 14px;
+  cursor: pointer;
+}
