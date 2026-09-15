@@ -17,6 +17,7 @@ function estadoInicial() {
     dadosJogador2: [null, null],
     placar: { jogador1: 0, jogador2: 0 },
     mensagemRodada: "",
+    aguardandoProximaRodada: false,
     jogoFinalizado: false,
     resultadoFinal: "",
   };
@@ -44,13 +45,13 @@ export default function JogoDados() {
     const novoPlacar = { ...estado.placar };
 
     if (soma1 > soma2) {
-      mensagem = "Jogador 1 venceu";
+      mensagem = `Jogador 1 venceu (${soma1} x ${soma2})`;
       novoPlacar.jogador1 = novoPlacar.jogador1 + 1;
     } else if (soma2 > soma1) {
-      mensagem = "Jogador 2 venceu";
+      mensagem = `Jogador 2 venceu (${soma1} x ${soma2})`;
       novoPlacar.jogador2 = novoPlacar.jogador2 + 1;
     } else {
-      mensagem = "Empate";
+      mensagem = `Empate (${soma1} x ${soma2})`;
     }
 
     const ultimaRodada = estado.rodadaAtual === TOTAL_RODADAS;
@@ -74,21 +75,35 @@ export default function JogoDados() {
         resultadoFinal: resultadoFinal,
       });
     } else {
+      // Guarda o resultado da rodada e ESPERA o clique em "Próxima Rodada"
+      // em vez de já avançar — assim os dois dados ficam visíveis na tela.
       setEstado({
         ...estado,
-        dadosJogador1: [null, null],
-        dadosJogador2: [null, null],
+        dadosJogador2: novosDados2,
         placar: novoPlacar,
         mensagemRodada: mensagem,
-        rodadaAtual: estado.rodadaAtual + 1,
-        jogadorDaVez: 1,
+        aguardandoProximaRodada: true,
       });
     }
+  }
+
+  function proximaRodada() {
+    setEstado({
+      ...estado,
+      rodadaAtual: estado.rodadaAtual + 1,
+      jogadorDaVez: 1,
+      dadosJogador1: [null, null],
+      dadosJogador2: [null, null],
+      mensagemRodada: "",
+      aguardandoProximaRodada: false,
+    });
   }
 
   function jogarNovamente() {
     setEstado(estadoInicial());
   }
+
+  const podeJogar = !estado.jogoFinalizado && !estado.aguardandoProximaRodada;
 
   return (
     <div className="mesa">
@@ -101,13 +116,13 @@ export default function JogoDados() {
       </p>
 
       <div className="jogadores">
-        <div className="painel">
+        <div className={"painel" + (podeJogar && estado.jogadorDaVez === 1 ? " painelAtivo" : "")}>
           <p className="nomeJogador">Jogador 1</p>
           <div className="dados">
             <Dado valor={estado.dadosJogador1[0]} />
             <Dado valor={estado.dadosJogador1[1]} />
           </div>
-          {!estado.jogoFinalizado && (
+          {podeJogar && (
             <button
               className="botaoJogar"
               onClick={jogarJogador1}
@@ -119,13 +134,13 @@ export default function JogoDados() {
           <p className="placar">Vitórias: {estado.placar.jogador1}</p>
         </div>
 
-        <div className="painel">
+        <div className={"painel" + (podeJogar && estado.jogadorDaVez === 2 ? " painelAtivo" : "")}>
           <p className="nomeJogador">Jogador 2</p>
           <div className="dados">
             <Dado valor={estado.dadosJogador2[0]} />
             <Dado valor={estado.dadosJogador2[1]} />
           </div>
-          {!estado.jogoFinalizado && (
+          {podeJogar && (
             <button
               className="botaoJogar"
               onClick={jogarJogador2}
@@ -142,6 +157,12 @@ export default function JogoDados() {
         <p className="caixaMensagem">{estado.mensagemRodada}</p>
       )}
 
+      {estado.aguardandoProximaRodada && (
+        <button className="botaoProximo" onClick={proximaRodada}>
+          Próxima Rodada
+        </button>
+      )}
+
       {estado.jogoFinalizado && (
         <button className="botaoReiniciar" onClick={jogarNovamente}>
           Jogar Novamente
@@ -149,4 +170,4 @@ export default function JogoDados() {
       )}
     </div>
   );
-        }
+}
