@@ -25,6 +25,7 @@ body {
 .titulo {
   margin: 0 0 4px;
   font-size: 24px;
+  color: #6d28d9;
 }
 
 .subtitulo {
@@ -40,9 +41,13 @@ body {
 
 .painel {
   flex: 1;
-  border: 1px solid #dddddd;
+  border: 2px solid #dddddd;
   border-radius: 8px;
   padding: 12px 8px;
+}
+
+.painelAtivo {
+  border-color: #6d28d9;
 }
 
 .nomeJogador {
@@ -73,7 +78,7 @@ body {
   padding: 10px;
   border: none;
   border-radius: 6px;
-  background-color: #2b6cb0;
+  background-color: #6d28d9;
   color: #ffffff;
   font-size: 14px;
   cursor: pointer;
@@ -92,13 +97,24 @@ body {
   margin: 0 0 16px;
 }
 
+.botaoProximo {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: #6d28d9;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
 .botaoReiniciar {
   width: 100%;
   padding: 10px;
-  border: 1px solid #2b6cb0;
+  border: 1px solid #6d28d9;
   border-radius: 6px;
   background-color: #ffffff;
-  color: #2b6cb0;
+  color: #6d28d9;
   font-size: 14px;
   cursor: pointer;
 }
